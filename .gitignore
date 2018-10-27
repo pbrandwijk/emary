@@ -6,5 +6,6 @@
 *.iml
 *.ipr
 .idea
+.gradle
 target
 bin
