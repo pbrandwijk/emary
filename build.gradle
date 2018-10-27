@@ -20,3 +20,14 @@ dependencies {
     compile group: 'net.sf.saxon', name: 'saxon-dom', version: '8.7'
     compile group: 'org.apache.santuario', name: 'xmlsec', version: '2.1.2'
 }
+
+task fatJar(type: Jar) {
+    manifest {
+        attributes 'Implementation-Title': 'Emary',
+                'Implementation-Version': version,
+                'Main-Class': 'com.pbrandwijk.emary.Main'
+    }
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+}
