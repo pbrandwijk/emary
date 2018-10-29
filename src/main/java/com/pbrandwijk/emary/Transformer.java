@@ -34,18 +34,18 @@ public class Transformer {
      * @param xmlStream
      */
     public static void transform(InputStream xmlStream) {
-        transform(xmlStream, new File(DEFAULT_OUTPUT_FILE_PATH));
+        InputStream xsltStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(DEFAULT_XSLT_FILE_PATH);
+        transform(xmlStream, xsltStream);
     }
 
     /**
      * Transform the given XML file with the default XSLT and output the result to the given file.
      *
      * @param xmlStream
-     * @param outputFile
+     * @param xsltStream
      */
-    public static void transform(InputStream xmlStream, File outputFile) {
-        InputStream xsltStream = Thread.currentThread().getContextClassLoader().getResourceAsStream(DEFAULT_XSLT_FILE_PATH);
-        transform(xmlStream, xsltStream, outputFile);
+    public static void transform(InputStream xmlStream, InputStream xsltStream) {
+        transform(xmlStream, xsltStream, new File(DEFAULT_OUTPUT_FILE_PATH));
     }
 
     /**
