@@ -15,6 +15,8 @@ import java.io.InputStream;
 public class TransformTest {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(TransformTest.class);
+    private static final String DEFAULT_XSLT_FILE_PATH = "build/resources/test/stylesheet.xsl";
+    private static final String DEFAULT_OUTPUT_FILE_PATH = "build/resources/test/output.xml";
 
     /**
      * Test that runs the transform method on a sample XML file to check that the code executes correctly.
@@ -24,8 +26,11 @@ public class TransformTest {
     @Test
     public void transformTest() throws Exception{
         File xmlFile = new File("build/resources/test/transformTest.xml");
+        File xsltFile = new File(DEFAULT_XSLT_FILE_PATH);
+        File outputFile = new File(DEFAULT_OUTPUT_FILE_PATH);
         InputStream xmlStream = new FileInputStream(xmlFile);
-        Transformer.transform(xmlStream);
+        InputStream xsltStream = new FileInputStream(xsltFile);
+        Transformer.transform(xmlStream, xsltStream, outputFile);
     }
 
 }
