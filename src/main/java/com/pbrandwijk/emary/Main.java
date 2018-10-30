@@ -35,6 +35,7 @@ public class Main {
                 break;
             case 1:
                 LOGGER.error("No XML or XSLT file is specified");
+                break;
             case 2:
                 transformXML(args[0], args[1]);
                 break;
