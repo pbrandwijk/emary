@@ -19,6 +19,8 @@ dependencies {
     compile group: 'net.sf.saxon', name: 'saxon', version: '8.7'
     compile group: 'net.sf.saxon', name: 'saxon-dom', version: '8.7'
     compile group: 'org.apache.santuario', name: 'xmlsec', version: '2.1.2'
+    compile group: 'xmlunit', name: 'xmlunit', version: '1.5'
+    compile group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 
 task fatJar(type: Jar) {
