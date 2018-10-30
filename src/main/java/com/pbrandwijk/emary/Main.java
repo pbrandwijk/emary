@@ -31,11 +31,15 @@ public class Main {
         // Determine the program execution based on the number of arguments
         switch (args.length) {
             case 0:
-                LOGGER.error("No XML file and no XSLT file is specified");
-                break;
+                String msg = "No XML file and no XSLT file is specified";
+                LOGGER.error(msg);
+                System.err.println(msg);
+                System.exit(1);
             case 1:
-                LOGGER.error("No XML or XSLT file is specified");
-                break;
+                msg = "No XML or XSLT file is specified";
+                LOGGER.error(msg);
+                System.err.println(msg);
+                System.exit(1);
             case 2:
                 transformXML(args[0], args[1]);
                 break;
@@ -43,7 +47,10 @@ public class Main {
                 transformXML(args[0], args[1], args[2]);
                 break;
             default:
-                LOGGER.error("Unknown argument: " + args[3]);
+                msg = "Unknown argument: " + args[3];
+                LOGGER.error(msg);
+                System.err.println(msg);
+                System.exit(1);
         }
     }
 
@@ -59,9 +66,15 @@ public class Main {
         try {
             Transformer.transform(new FileInputStream(xmlFile), new FileInputStream(xsltFile), outputFile);
         } catch (FileNotFoundException e) {
-            LOGGER.error("File could not be found", e);
+            String msg = "File could not be found";
+            LOGGER.error(msg, e);
+            System.err.println(msg);
+            System.exit(1);
         } catch (Exception e) {
-            LOGGER.warn("An exception occurred during the transformation", e);
+            String msg = "An exception occurred during the transformation";
+            LOGGER.error(msg, e);
+            System.err.println(msg);
+            System.exit(1);
         }
     }
 }
