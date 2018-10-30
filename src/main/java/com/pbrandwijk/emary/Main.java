@@ -3,9 +3,7 @@ package com.pbrandwijk.emary;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+import java.io.*;
 
 /**
  * Main entry point of the program. Responsible for parsing the arguments given to it on the command line and
@@ -65,6 +63,7 @@ public class Main {
 
         try {
             Transformer.transform(new FileInputStream(xmlFile), new FileInputStream(xsltFile), outputFile);
+            XMLCanonicalizer.canonicalize(outputFile);
         } catch (FileNotFoundException e) {
             String msg = "File could not be found";
             LOGGER.error(msg, e);
