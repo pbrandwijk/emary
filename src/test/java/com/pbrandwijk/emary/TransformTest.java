@@ -8,7 +8,7 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 /**
- * Test the transformation of a STEP document to a PRISMA document.
+ * Test the transformation of an XML document.
  *
  * @author Pieter Brandwijk
  */
