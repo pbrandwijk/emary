@@ -24,7 +24,6 @@ import java.nio.file.Files;
 public class XMLCanonicalizer {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(XMLCanonicalizer.class);
-    private static final String DEFAULT_CANONICAL_XML_FILE_PATH = "canonical.xml";
     private static final String DEFAULT_FILE_ENCODING = "UTF-8";
 
     /**
@@ -37,7 +36,7 @@ public class XMLCanonicalizer {
      * @throws CanonicalizationException
      * @throws IOException
      */
-    public static void canonicalize(File xmlFile) throws InvalidCanonicalizerException, ParserConfigurationException,
+    public static void canonicalize(File xmlFile, String outputPath) throws InvalidCanonicalizerException, ParserConfigurationException,
             SAXException, CanonicalizationException, IOException {
         LOGGER.info("Start canonicalization of XML");
         Init.init();
@@ -45,7 +44,7 @@ public class XMLCanonicalizer {
         byte canonXmlBytes[] = canon.canonicalize(Files.readAllBytes(xmlFile.toPath()));
         String canonXml = new String(canonXmlBytes);
 
-        FileUtils.writeStringToFile(new File(DEFAULT_CANONICAL_XML_FILE_PATH), canonXml, forName(DEFAULT_FILE_ENCODING));
+        FileUtils.writeStringToFile(new File(outputPath), canonXml, forName(DEFAULT_FILE_ENCODING));
         LOGGER.info("Canonicalization of XML finished");
     }
 }

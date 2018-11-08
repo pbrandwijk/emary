@@ -1,5 +1,6 @@
 package com.pbrandwijk.emary;
 
+import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,7 +15,8 @@ import java.io.*;
 public class Main {
 
     private static final Logger LOGGER = LoggerFactory.getLogger(Main.class);
-    private static final String DEFAULT_OUTPUT_FILE_PATH = "output.xml";
+    private static final String DEFAULT_TRANSFORMED_OUTPUT_FILE_PATH = "output.xml";
+    private static final String DEFAULT_CANONICAL_XML_FILE_PATH = "canonical.xml";
 
     /**
      * Entry method for the program. Select execution path based on number of arguments given. Assumed order:
@@ -52,17 +54,18 @@ public class Main {
     }
 
     private static void transformXML(String xmlPath, String xsltPath) {
-        transformXML(xmlPath, xsltPath, DEFAULT_OUTPUT_FILE_PATH);
+        transformXML(xmlPath, xsltPath, DEFAULT_CANONICAL_XML_FILE_PATH);
     }
 
     private static void transformXML(String xmlPath, String xsltPath, String outputPath) {
         File xmlFile = new File(xmlPath);
         File xsltFile = new File(xsltPath);
-        File outputFile = new File(outputPath);
+        File transformedXMLFile = new File(DEFAULT_TRANSFORMED_OUTPUT_FILE_PATH);
 
         try {
-            Transformer.transform(new FileInputStream(xmlFile), new FileInputStream(xsltFile), outputFile);
-            XMLCanonicalizer.canonicalize(outputFile);
+            Transformer.transform(new FileInputStream(xmlFile), new FileInputStream(xsltFile), transformedXMLFile);
+            XMLCanonicalizer.canonicalize(transformedXMLFile, outputPath);
+            FileUtils.forceDeleteOnExit(transformedXMLFile);
         } catch (FileNotFoundException e) {
             String msg = "File could not be found";
             LOGGER.error(msg, e);
