@@ -32,12 +32,12 @@ public class Main {
                 String msg = "No XML file and no XSLT file is specified";
                 LOGGER.error(msg);
                 System.err.println(msg);
-                System.exit(1);
+                break;
             case 1:
                 msg = "No XML or XSLT file is specified";
                 LOGGER.error(msg);
                 System.err.println(msg);
-                System.exit(1);
+                break;
             case 2:
                 transformXML(args[0], args[1]);
                 break;
@@ -48,7 +48,6 @@ public class Main {
                 msg = "Unknown argument: " + args[3];
                 LOGGER.error(msg);
                 System.err.println(msg);
-                System.exit(1);
         }
     }
 
