@@ -22,6 +22,7 @@ dependencies {
     compile group: 'org.apache.santuario', name: 'xmlsec', version: '2.1.2'
     compile group: 'xmlunit', name: 'xmlunit', version: '1.5'
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
+    compile group: 'info.picocli', name: 'picocli', version: '3.7.0'
 }
 
 // Configuration for generating a standalone jar file
