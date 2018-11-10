@@ -1,7 +1,5 @@
 package com.pbrandwijk.emary;
 
-import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,19 +13,8 @@ public class MainTest {
 
     @Test
     public void testXMLTransformation() {
-        String[] args = {argXMLPath};
-        Main.main(args);
-    }
-
-    @Test
-    public void testXMLTransformationWithXSLT() {
-        String[] args = {argXMLPath, argXSLTPath};
-        Main.main(args);
-    }
-
-    @Test
-    public void testXMLTransformationWithXSLTtoOutput() {
-        String[] args = {argXMLPath, argXSLTPath, argOutputPath};
+        LOGGER.debug("Starting test");
+        String[] args = {"-f", argXMLPath, "-s", argXSLTPath, "-o", argOutputPath};
         Main.main(args);
     }
 
