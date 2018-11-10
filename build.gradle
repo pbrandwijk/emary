@@ -1,5 +1,6 @@
 plugins {
     id 'java'
+    id 'application'
 }
 
 group 'com.pbrandwijk'
@@ -23,6 +24,8 @@ dependencies {
     compile group: 'commons-io', name: 'commons-io', version: '2.6'
 }
 
+// Configuration for generating a standalone jar file
+
 task fatJar(type: Jar) {
     manifest {
         attributes 'Implementation-Title': 'Emary',
@@ -32,4 +35,22 @@ task fatJar(type: Jar) {
     archiveName = project.name + '.jar'
     from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
     with jar
+}
+
+// Configuration for binary distribution
+
+mainClassName = 'com.pbrandwijk.emary.Main'
+
+task copyLicense {
+    outputs.file new File("$buildDir/LICENSE")
+    doLast {
+        copy {
+            from "LICENSE"
+            into "$buildDir"
+        }
+    }
+}
+
+applicationDistribution.from(copyLicense) {
+    into ""
 }
