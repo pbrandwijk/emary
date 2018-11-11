@@ -23,8 +23,16 @@ public class Main {
 
         LOGGER.trace("Entered into main method, going to populate command");
         ExecutionCommand cmd = CommandLine.populateCommand(new ExecutionCommand(), args);
-        LOGGER.trace("Command populated, going to execute transformation");
-        cmd.transformXML();
-        LOGGER.trace("Transformation executed");
+        LOGGER.trace("Command populated, checking if usage help was requested");
+        if (cmd.usageHelpRequested) {
+            CommandLine.usage(new ExecutionCommand(), System.out);
+            return;
+        }
+        else {
+            LOGGER.trace("No usage help requested, going to execute transform command");
+            cmd.transformXML();
+            LOGGER.trace("Transformation executed");
+        }
+        LOGGER.trace("Program is going to terminate");
     }
 }
